@@ -1,0 +1,23 @@
+{
+  "name": "app-heroku",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CristianAdrianPulupa/app-heroku.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CristianAdrianPulupa/app-heroku/issues"
+  },
+  "homepage": "https://github.com/CristianAdrianPulupa/app-heroku#readme",
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
