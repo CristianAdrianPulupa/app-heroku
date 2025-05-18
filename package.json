@@ -1,24 +1,31 @@
 {
   "name": "app-heroku",
   "version": "1.0.0",
+  "description": "Microservicio API REST para gestión de clientes en Heroku",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CristianAdrianPulupa/app-heroku.git"
+    "url": "https://github.com/CristianAdrianPulupa/app-heroku.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "heroku",
+    "api",
+    "clientes",
+    "mysql",
+    "docker"
+  ],
+  "author": "Cristian Adrian Pulupa",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/CristianAdrianPulupa/app-heroku/issues"
   },
   "homepage": "https://github.com/CristianAdrianPulupa/app-heroku#readme",
-  "description": "",
   "dependencies": {
-    "express": "^5.1.0",
+    "dotenv": "^16.5.0",
+    "express": "^4.21.2",
     "mysql2": "^3.14.1"
   }
 }

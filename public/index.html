@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Gestión de Clientes</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>¡Bienvenido!  <span class="highlight">Registrate</span> 👋</h1>
+    <p>Explora mi servicio desplegado en Heroku</p>
+
+    <form id="clienteForm">
+      <input type="text" id="nombre" placeholder="Nombre" required />
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="tel" id="telefono" placeholder="Teléfono" required />
+      <input type="text" id="direccion" placeholder="Dirección" required />
+      <button type="submit">Registrate</button>
+    </form>
+
+    <h2>📋 Lista de Clientes</h2>
+    <ul id="listaClientes" class="clientes">
+      <!-- Datos quemados (ejemplares) -->
+      <li>
+        <strong>Ana Pérez</strong><br>
+        📧 ana@example.com<br>
+        📞 0991234567<br>
+        📍 Av. Amazonas y Naciones Unidas, Quito
+      </li>
+      <li>
+        <strong>Juan Torres</strong><br>
+        📧 juan@example.com<br>
+        📞 0987654321<br>
+        📍 Calle 10 de Agosto, Guayaquil
+      </li>
+      <li>
+        <strong>María Gómez</strong><br>
+        📧 maria@example.com<br>
+        📞 0970011223<br>
+        📍 Av. de los Shyris, Quito
+      </li>
+    </ul>
+  </div>
+
+  <script>
+    const form = document.getElementById('clienteForm');
+    const lista = document.getElementById('listaClientes');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const nombre = document.getElementById('nombre').value;
+      const email = document.getElementById('email').value;
+      const telefono = document.getElementById('telefono').value;
+      const direccion = document.getElementById('direccion').value;
+
+      await fetch('/clientes', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ nombre, email, telefono, direccion })
+      });
+
+      form.reset();
+      cargarClientes();
+    });
+
+    async function cargarClientes() {
+      const res = await fetch('/clientes');
+      const data = await res.json();
+      lista.innerHTML = '';
+      data.forEach(c => {
+        lista.innerHTML += `
+          <li>
+            <strong>${c.nombre}</strong><br>
+            📧 ${c.email}<br>
+            📞 ${c.telefono}<br>
+            📍 ${c.direccion}
+          </li>
+        `;
+      });
+    }
+
+    // cargarClientes(); // Descomenta si usas base de datos
+  </script>
+</body>
+</html>
