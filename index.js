@@ -13,7 +13,7 @@ const db = mysql.createConnection({
   user: process.env.DB_USER,
   password: process.env.DB_PASS,
   database: process.env.DB_NAME,
-  port: process.env.DB_PORT
+  port: process.env.DB_PORT         
 });
 
 db.connect(err => {
@@ -34,13 +34,4 @@ app.get('/clientes', (req, res) => {
 });
 
 app.post('/clientes', (req, res) => {
-  const { nombre, email } = req.body;
-  db.query('INSERT INTO clientes (nombre, email) VALUES (?, ?)', [nombre, email], (err, result) => {
-    if (err) return res.status(500).send('Error al insertar cliente');
-    res.json({ id: result.insertId, nombre, email });
-  });
-});
-
-app.listen(PORT, () => {
-  console.log(`🚀 Servidor en http://localhost:${PORT}`);
-});
+  const                                                                                                                                                                                                                                                      
