@@ -33,6 +33,8 @@ jobs:
           echo "  login ${{ secrets.HEROKU_API_KEY }}" >> ~/.netrc
           echo "machine git.heroku.com" >> ~/.netrc
           echo "  login ${{ secrets.HEROKU_API_KEY }}" >> ~/.netrc
-          heroku git:remote -a clientes-heroku-pulupa
+          git remote add heroku https://git.heroku.com/clientes-heroku-pulupa.git
+          git fetch --unshallow
           git push --force https://heroku:$HEROKU_API_KEY@git.heroku.com/clientes-heroku-pulupa.git HEAD:main
+
 
