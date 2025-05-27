@@ -21,16 +21,17 @@ jobs:
       - name: Instalar dependencias
         run: npm install
 
-      - name: Instalar CLI de Heroku
-        uses: akhileshns/heroku-cli-action@v1.2.2
-        with:
-          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-          heroku_app_name: "clientes-heroku-pulupa"
-          heroku_email: "mftc2105@gmail.com"
-
-      - name: Hacer deploy manual con Git
+      - name: Instalar Heroku CLI manualmente
         run: |
-          heroku git:remote -a clientes-heroku-pulupa
-          git push https://heroku:$HEROKU_API_KEY@git.heroku.com/clientes-heroku-pulupa.git HEAD:main
+          curl https://cli-assets.heroku.com/install.sh | sh
+
+      - name: Autenticarse y hacer deploy a Heroku
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: |
+          echo "machine api.heroku.com" > ~/.netrc
+          echo "  login ${{ secrets.HEROKU_API_KEY }}" >> ~/.netrc
+          echo "machine git.heroku.com" >> ~/.netrc
+          echo "  login ${{ secrets.HEROKU_API_KEY }}" >> ~/.netrc
+          heroku git:remote -a clientes-heroku-pulupa
+          git push https://heroku:$HEROKU_API_KEY@git.heroku.com/clientes-heroku-pulupa.git HEAD:main
