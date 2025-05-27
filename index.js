@@ -34,4 +34,13 @@ app.get('/clientes', (req, res) => {
 });
 
 app.post('/clientes', (req, res) => {
-  const                                                                                                                                                                                                                                                      
+    const { nombre, correo } = req.body;
+    db.query('INSERT INTO clientes (nombre, correo) VALUES (?, ?)', [nombre, correo], (err, result) => {
+        if (err) return res.status(500).send('Error al insertar cliente');
+        res.status(201).send('Cliente agregado correctamente');
+    });
+});
+
+app.listen(PORT, () => {
+    console.log(`Servidor corriendo en puerto ${PORT}`);
+});
