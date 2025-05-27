@@ -21,10 +21,9 @@ jobs:
       - name: Instalar dependencias
         run: npm install
 
-      - name: Desplegar a Heroku
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        run: |
-          npm install -g heroku
-          heroku git:remote clientes-heroku-pulupa
-          git push https://heroku:$HEROKU_API_KEY@git.heroku.com/clientes-heroku-pulupa.git HEAD:main
+      - name: Desplegar con acción oficial de Heroku
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: "clientes-heroku-pulupa"
+          heroku_email: "mftc2105@gmail.com"
